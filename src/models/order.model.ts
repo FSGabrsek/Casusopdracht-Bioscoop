@@ -39,7 +39,7 @@ export class Order {
         // define seat price premium
         const premium = this._isStudentOrder ? 2 : 3;
 
-        let applyDayDiscount = false;
+        let applyAlternatingDiscount = false;
         this._seatReservations.forEach((reservation) => {
             // set base price
             let price = reservation.isPremiumTicket() ? reservation.price + premium : reservation.price;
@@ -47,10 +47,10 @@ export class Order {
             // check date for alternating discount
             if (alternatingDiscountDays.includes(reservation.movieScreening.dateAndTime.getDay())) {
                 // apply discount on alternating days
-                if (applyDayDiscount) {
+                if (applyAlternatingDiscount) {
                     price = (price * (1 - alternatingDiscount));
                 }
-                applyDayDiscount = !applyDayDiscount;
+                applyAlternatingDiscount = !applyAlternatingDiscount;
             } else {
                 // check for group discount if date doesn't match
                 if (this._seatReservations.length >= groupDiscountRequiredSize) {
