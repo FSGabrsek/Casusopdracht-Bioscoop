@@ -25,7 +25,7 @@ export class MovieTicket {
     }
 
     
-    public get Price() : number {
+    public get price() : number {
         return -1;
     }
 }
