@@ -33,7 +33,7 @@ export class Order {
         const alternatingDiscount = this._isStudentOrder ? 1.00 : 1.00;
 
         // define group size discount
-        const groupDiscountRequiredSize = this._isStudentOrder ? 0 : 6;
+        const groupDiscountRequiredSize = this._isStudentOrder ? Infinity : 6;
         const groupDiscount = this._isStudentOrder ? 0.00 : 0.10;
 
         // define seat price premium
@@ -64,7 +64,7 @@ export class Order {
 
         // total price
         const total = +priceList.reduce((partial, val) => partial + val, 0).toFixed(2);
-        return total
+        return total;
     }
 
     export(exportFormat: TicketExportFormat): void {
