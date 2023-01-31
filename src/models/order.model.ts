@@ -32,8 +32,8 @@ export class Order {
         const alternatingDiscount = this._isStudentOrder ? 1.00 : 1.00;
 
         // define group size discount
-        const discountRequiredGroupSize = this._isStudentOrder ? 0 : 6;
-        const groupSizeDiscount = this._isStudentOrder ? 0.00 : 0.10;
+        const groupDiscountRequiredSize = this._isStudentOrder ? 0 : 6;
+        const groupDiscount = this._isStudentOrder ? 0.00 : 0.10;
 
         // define seat price premium
         const premium = this._isStudentOrder ? 2 : 3;
@@ -52,8 +52,8 @@ export class Order {
                 applyDayDiscount = !applyDayDiscount;
             } else {
                 // check for group discount if date doesn't match
-                if (this._seatReservations.length >= discountRequiredGroupSize) {
-                    price = (price * (1 - groupSizeDiscount));
+                if (this._seatReservations.length >= groupDiscountRequiredSize) {
+                    price = (price * (1 - groupDiscount));
                 }
             }
 
