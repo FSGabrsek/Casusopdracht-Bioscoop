@@ -2,6 +2,8 @@ import { TicketExportFormat } from "../enums/ticket-export-format.enum";
 import { MovieTicket } from "./movie-ticket.model";
 
 export class Order {
+    private _seatReservations: MovieTicket[] = [];
+
     private _orderNr: number;
     private _isStudentOrder: boolean;
 
@@ -19,7 +21,7 @@ export class Order {
     }
     
     addSeatReservation(ticket: MovieTicket): void {
-
+        this._seatReservations.push(ticket);
     }
 
     calculatePrice(): number {

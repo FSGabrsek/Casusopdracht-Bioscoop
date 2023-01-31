@@ -1,8 +1,9 @@
 import { MovieScreening } from "./movie-screening.model";
 
 export class Movie {
-    private _title: string;
     private _screenings: MovieScreening[] = [];
+    
+    private _title: string;
     
     constructor(
         title: string

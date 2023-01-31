@@ -1,6 +1,8 @@
 import { MovieScreening } from "./movie-screening.model";
 
 export class MovieTicket {
+    private _movieScreening: MovieScreening;
+
     private _rowNr: number;
     private _seatNr: number;
     private _isPremium: boolean;
@@ -11,6 +13,8 @@ export class MovieTicket {
         rowNr: number,
         seatNr: number,
     ) {
+        this._movieScreening = movieScreening;
+
         this._rowNr = rowNr;
         this._seatNr = seatNr;
         this._isPremium = isPremiumReservation;
