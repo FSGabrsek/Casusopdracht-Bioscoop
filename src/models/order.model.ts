@@ -68,6 +68,15 @@ export class Order {
     }
 
     export(exportFormat: TicketExportFormat): void {
-
+        switch (exportFormat) {
+            case TicketExportFormat.json:
+                writeFileSync(`./out/order${this._orderNr}.json`, JSON.stringify(this));
+                break;
+            case TicketExportFormat.plaintext:
+                writeFileSync(`./out/order${this._orderNr}.txt`, JSON.stringify(this));
+                break;
+            default:
+                throw new Error("unknown export format");
+        }
     }
 }
