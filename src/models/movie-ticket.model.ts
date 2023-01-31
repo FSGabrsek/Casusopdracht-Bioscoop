@@ -28,4 +28,9 @@ export class MovieTicket {
     public get price() : number {
         return -1;
     }
+
+    public get movieScreening() : MovieScreening {
+        return this._movieScreening
+    }
+    
 }

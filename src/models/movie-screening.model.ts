@@ -17,4 +17,8 @@ export class MovieScreening {
     public get pricePerSeat() : number {
         return this._pricePerSeat
     }
+    
+    public get dateAndTime() : Date {
+        return this._dateAndTime
+    }
 }
