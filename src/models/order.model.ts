@@ -1,5 +1,6 @@
 import { TicketExportFormat } from "../enums/ticket-export-format.enum";
 import { MovieTicket } from "./movie-ticket.model";
+import { writeFileSync } from 'node:fs'
 
 export class Order {
     private _seatReservations: MovieTicket[] = [];
@@ -62,7 +63,7 @@ export class Order {
         });
 
         // total price
-        const total = priceList.reduce((partial, val) => partial + val, 0);
+        const total = +priceList.reduce((partial, val) => partial + val, 0).toFixed(2);
         return total
     }
 
