@@ -26,7 +26,7 @@ export class MovieTicket {
 
     
     public get price() : number {
-        return -1;
+        return this.movieScreening.pricePerSeat;
     }
 
     public get movieScreening() : MovieScreening {
