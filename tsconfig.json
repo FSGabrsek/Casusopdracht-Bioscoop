@@ -15,6 +15,7 @@
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
       "moduleResolution": "node",
+      "removeComments": true,
 
       "outDir": "dist"
     },
