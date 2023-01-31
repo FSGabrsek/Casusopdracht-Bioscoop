@@ -29,11 +29,11 @@ export class Order {
 
         // define alterating discount
         const alternatingDiscountDays = this._isStudentOrder ? [0, 1, 2, 3, 4, 5, 6] : [1, 2, 3, 4];
-        const dayAlternatingDiscountPercentage = this._isStudentOrder ? 1.00 : 1.00;
+        const alternatingDiscount = this._isStudentOrder ? 1.00 : 1.00;
 
         // define group size discount
-        const discountGroupSize = this._isStudentOrder ? 0 : 6;
-        const groupSizeDiscountPercentage = this._isStudentOrder ? 0.00 : 0.10;
+        const discountRequiredGroupSize = this._isStudentOrder ? 0 : 6;
+        const groupSizeDiscount = this._isStudentOrder ? 0.00 : 0.10;
 
         // define seat price premium
         const premium = this._isStudentOrder ? 2 : 3;
@@ -47,13 +47,13 @@ export class Order {
             if (alternatingDiscountDays.includes(reservation.movieScreening.dateAndTime.getDay())) {
                 // apply discount on alternating days
                 if (applyDayDiscount) {
-                    price = (price * (1 - dayAlternatingDiscountPercentage));
+                    price = (price * (1 - alternatingDiscount));
                 }
                 applyDayDiscount = !applyDayDiscount;
             } else {
                 // check for group discount if date doesn't match
-                if (this._seatReservations.length >= discountGroupSize) {
-                    price = (price * (1 - groupSizeDiscountPercentage));
+                if (this._seatReservations.length >= discountRequiredGroupSize) {
+                    price = (price * (1 - groupSizeDiscount));
                 }
             }
 
