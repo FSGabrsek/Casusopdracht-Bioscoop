@@ -28,41 +28,29 @@ export class Order {
     calculatePrice(): number {
         const priceList: number[] = [];
 
-        // define alterating discount
         const alternatingDiscountDays = this._isStudentOrder ? [0, 1, 2, 3, 4, 5, 6] : [1, 2, 3, 4];
         const alternatingDiscount = this._isStudentOrder ? 1.00 : 1.00;
-
-        // define group size discount
         const groupDiscountRequiredSize = this._isStudentOrder ? Infinity : 6;
         const groupDiscount = this._isStudentOrder ? 0.00 : 0.10;
-
-        // define seat price premium
         const premium = this._isStudentOrder ? 2 : 3;
 
         let applyAlternatingDiscount = false;
         this._seatReservations.forEach((reservation) => {
-            // set base price
             let price = reservation.isPremiumTicket() ? reservation.price + premium : reservation.price;
 
-            // check date for alternating discount
             if (alternatingDiscountDays.includes(reservation.movieScreening.dateAndTime.getDay())) {
-                // apply discount on alternating days
                 if (applyAlternatingDiscount) {
                     price = (price * (1 - alternatingDiscount));
                 }
                 applyAlternatingDiscount = !applyAlternatingDiscount;
             } else {
-                // check for group discount if date doesn't match
                 if (this._seatReservations.length >= groupDiscountRequiredSize) {
                     price = (price * (1 - groupDiscount));
                 }
             }
-
-            // add price to list
             priceList.push(price);
         });
 
-        // total price
         const total = +priceList.reduce((partial, val) => partial + val, 0).toFixed(2);
         return total;
     }
