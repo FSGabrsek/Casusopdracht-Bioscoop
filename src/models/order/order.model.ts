@@ -1,6 +1,4 @@
-import { TicketExportFormat } from "../../enums/ticket-export-format.enum";
 import { MovieTicket } from "../movie-ticket.model";
-import { writeFileSync } from 'node:fs'
 import { PriceStrategy } from "./strategies/price.strategy";
 import { ExportStrategy } from "./strategies/export.strategy";
 
