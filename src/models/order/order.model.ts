@@ -1,5 +1,5 @@
-import { TicketExportFormat } from "../enums/ticket-export-format.enum";
-import { MovieTicket } from "./movie-ticket.model";
+import { TicketExportFormat } from "../../enums/ticket-export-format.enum";
+import { MovieTicket } from "../movie-ticket.model";
 import { writeFileSync } from 'node:fs'
 
 export class Order {

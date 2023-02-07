@@ -1,7 +1,7 @@
 import { MovieScreening } from "../../src/models/movie-screening.model";
 import { MovieTicket } from "../../src/models/movie-ticket.model";
 import { Movie } from "../../src/models/movie.model";
-import { Order } from "../../src/models/order.model";
+import { Order } from "../../src/models/order/order.model";
 
 test('calculates price for 2 non-premium tickets in standard orders on sundays', () => { 
     const movie = new Movie('movie title');
