@@ -2,19 +2,23 @@ import { TicketExportFormat } from "../../enums/ticket-export-format.enum";
 import { MovieTicket } from "../movie-ticket.model";
 import { writeFileSync } from 'node:fs'
 import { PriceStrategy } from "./strategies/price.strategy";
+import { ExportStrategy } from "./strategies/export.strategy";
 
 export abstract class Order {
     private _seatReservations: MovieTicket[] = [];
 
     private _orderNr: number;
     private _priceStrategy: PriceStrategy;
+    private _exportStrategy: ExportStrategy;
 
     constructor(
         orderNr: number,
-        priceStrategy: PriceStrategy
+        priceStrategy: PriceStrategy,
+        exportStrategy: ExportStrategy
     ) {
         this._orderNr = orderNr;
         this._priceStrategy = priceStrategy;
+        this._exportStrategy = exportStrategy
     }
     
     public get orderNr() : number {
@@ -30,15 +34,6 @@ export abstract class Order {
     }
 
     export(exportFormat: TicketExportFormat): void {
-        switch (exportFormat) {
-            case TicketExportFormat.json:
-                writeFileSync(`./out/order${this._orderNr}.json`, JSON.stringify(this));
-                break;
-            case TicketExportFormat.plaintext:
-                writeFileSync(`./out/order${this._orderNr}.txt`, JSON.stringify(this));
-                break;
-            default:
-                throw new Error("unknown export format");
-        }
+        this._exportStrategy.export(this);
     }
 }

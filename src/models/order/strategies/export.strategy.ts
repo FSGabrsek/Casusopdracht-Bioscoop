@@ -1,3 +1,5 @@
+import { Order } from "../order.model";
+
 export interface ExportStrategy {
-    export(): void
+    export(order: Order): void
 }
