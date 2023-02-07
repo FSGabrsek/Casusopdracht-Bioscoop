@@ -1,7 +1,6 @@
 import { MovieScreening } from "../../src/models/movie-screening.model";
 import { MovieTicket } from "../../src/models/movie-ticket.model";
 import { Movie } from "../../src/models/movie.model";
-import { Order } from "../../src/models/order/order.model";
 import { StandardPlainTextOrder } from "../../src/models/order/standard-plaintext-order.model";
 import { StudentPlainTextOrder } from "../../src/models/order/student-plaintext-order.model";
 
@@ -18,7 +17,7 @@ test('calculates price for 2 non-premium tickets in standard orders on sundays',
     const price = order.calculatePrice();
     const expectedPrice = 20;
 
-    expect(price).toBe(expectedPrice)
+    expect(price).toBe(expectedPrice);
 });
 
 test('calculates price for 2 premium tickets in standard orders on sundays', () => { 
@@ -34,7 +33,7 @@ test('calculates price for 2 premium tickets in standard orders on sundays', () 
     const price = order.calculatePrice();
     const expectedPrice = 26;
 
-    expect(price).toBe(expectedPrice)
+    expect(price).toBe(expectedPrice);
 });
 
 test('calculates price for 2 non premium tickets in standard orders on mondays', () => { 
@@ -50,7 +49,7 @@ test('calculates price for 2 non premium tickets in standard orders on mondays',
     const price = order.calculatePrice();
     const expectedPrice = 10;
 
-    expect(price).toBe(expectedPrice)
+    expect(price).toBe(expectedPrice);
 });
 
 test('calculates price for 2 premium tickets in standard orders on mondays', () => { 
@@ -66,7 +65,7 @@ test('calculates price for 2 premium tickets in standard orders on mondays', () 
     const price = order.calculatePrice();
     const expectedPrice = 13;
 
-    expect(price).toBe(expectedPrice)
+    expect(price).toBe(expectedPrice);
 });
 
 test('calculates price for 2 non-premium tickets in student orders on sundays', () => { 
@@ -82,7 +81,7 @@ test('calculates price for 2 non-premium tickets in student orders on sundays', 
     const price = order.calculatePrice();
     const expectedPrice = 10;
 
-    expect(price).toBe(expectedPrice)
+    expect(price).toBe(expectedPrice);
 });
 
 test('calculates price for 2 premium tickets in student orders on sundays', () => { 
@@ -98,7 +97,7 @@ test('calculates price for 2 premium tickets in student orders on sundays', () =
     const price = order.calculatePrice();
     const expectedPrice = 12;
 
-    expect(price).toBe(expectedPrice)
+    expect(price).toBe(expectedPrice);
 });
 
 test('calculates price for 6 non-premium tickets in standard orders on sundays', () => { 
@@ -118,7 +117,7 @@ test('calculates price for 6 non-premium tickets in standard orders on sundays',
     const price = order.calculatePrice();
     const expectedPrice = 54;
 
-    expect(price).toBe(expectedPrice)
+    expect(price).toBe(expectedPrice);
 });
 
 test('calculates price for 6 premium tickets in standard orders on sundays', () => { 
@@ -138,5 +137,5 @@ test('calculates price for 6 premium tickets in standard orders on sundays', () 
     const price = order.calculatePrice();
     const expectedPrice = 70.20;
 
-    expect(price).toBe(expectedPrice)
+    expect(price).toBe(expectedPrice);
 });
