@@ -33,7 +33,7 @@ export abstract class Order {
         return this._priceStrategy.calculatePrice(this._seatReservations);
     }
 
-    export(exportFormat: TicketExportFormat): void {
+    export(): void {
         this._exportStrategy.export(this);
     }
 }
