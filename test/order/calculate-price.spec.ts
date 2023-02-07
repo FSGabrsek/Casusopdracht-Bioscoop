@@ -2,6 +2,8 @@ import { MovieScreening } from "../../src/models/movie-screening.model";
 import { MovieTicket } from "../../src/models/movie-ticket.model";
 import { Movie } from "../../src/models/movie.model";
 import { Order } from "../../src/models/order/order.model";
+import { StandardOrder } from "../../src/models/order/standard-order.model";
+import { StudentOrder } from "../../src/models/order/student-order.model";
 
 test('calculates price for 2 non-premium tickets in standard orders on sundays', () => { 
     const movie = new Movie('movie title');
@@ -10,7 +12,7 @@ test('calculates price for 2 non-premium tickets in standard orders on sundays',
         new MovieTicket(screening, false, 1, 1),
         new MovieTicket(screening, false, 1, 2),
     ];
-    const order = new Order(1, false);
+    const order = new StandardOrder(1);
     tickets.forEach(reservation => order.addSeatReservation(reservation));
 
     const price = order.calculatePrice();
@@ -26,7 +28,7 @@ test('calculates price for 2 premium tickets in standard orders on sundays', () 
         new MovieTicket(screening, true, 1, 1),
         new MovieTicket(screening, true, 1, 2),
     ];
-    const order = new Order(1, false);
+    const order = new StandardOrder(1);
     tickets.forEach(reservation => order.addSeatReservation(reservation));
 
     const price = order.calculatePrice();
@@ -42,7 +44,7 @@ test('calculates price for 2 non premium tickets in standard orders on mondays',
         new MovieTicket(screening, false, 1, 1),
         new MovieTicket(screening, false, 1, 2),
     ];
-    const order = new Order(1, false);
+    const order = new StandardOrder(1);
     tickets.forEach(reservation => order.addSeatReservation(reservation));
 
     const price = order.calculatePrice();
@@ -58,7 +60,7 @@ test('calculates price for 2 premium tickets in standard orders on mondays', () 
         new MovieTicket(screening, true, 1, 1),
         new MovieTicket(screening, true, 1, 2),
     ];
-    const order = new Order(1, false);
+    const order = new StandardOrder(1);
     tickets.forEach(reservation => order.addSeatReservation(reservation));
 
     const price = order.calculatePrice();
@@ -74,7 +76,7 @@ test('calculates price for 2 non-premium tickets in student orders on sundays', 
         new MovieTicket(screening, false, 1, 1),
         new MovieTicket(screening, false, 1, 2),
     ];
-    const order = new Order(1, true);
+    const order = new StudentOrder(1);
     tickets.forEach(reservation => order.addSeatReservation(reservation));
 
     const price = order.calculatePrice();
@@ -90,7 +92,7 @@ test('calculates price for 2 premium tickets in student orders on sundays', () =
         new MovieTicket(screening, true, 1, 1),
         new MovieTicket(screening, true, 1, 2),
     ];
-    const order = new Order(1, true);
+    const order = new StudentOrder(1);
     tickets.forEach(reservation => order.addSeatReservation(reservation));
 
     const price = order.calculatePrice();
@@ -110,7 +112,7 @@ test('calculates price for 6 non-premium tickets in standard orders on sundays',
         new MovieTicket(screening, false, 1, 5),
         new MovieTicket(screening, false, 1, 6),
     ];
-    const order = new Order(1, false);
+    const order = new StandardOrder(1);
     tickets.forEach(reservation => order.addSeatReservation(reservation));
 
     const price = order.calculatePrice();
@@ -130,7 +132,7 @@ test('calculates price for 6 premium tickets in standard orders on sundays', () 
         new MovieTicket(screening, true, 1, 5),
         new MovieTicket(screening, true, 1, 6),
     ];
-    const order = new Order(1, false);
+    const order = new StandardOrder(1);
     tickets.forEach(reservation => order.addSeatReservation(reservation));
 
     const price = order.calculatePrice();

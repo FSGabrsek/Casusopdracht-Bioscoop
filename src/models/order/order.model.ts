@@ -1,21 +1,21 @@
 import { TicketExportFormat } from "../../enums/ticket-export-format.enum";
 import { MovieTicket } from "../movie-ticket.model";
 import { writeFileSync } from 'node:fs'
+import { PriceStrategy } from "./strategies/price.strategy";
 
-export class Order {
+export abstract class Order {
     private _seatReservations: MovieTicket[] = [];
 
     private _orderNr: number;
-    private _isStudentOrder: boolean;
+    private _priceStrategy: PriceStrategy;
 
     constructor(
         orderNr: number,
-        isStudentOrder: boolean
+        priceStrategy: PriceStrategy
     ) {
         this._orderNr = orderNr;
-        this._isStudentOrder = isStudentOrder;
+        this._priceStrategy = priceStrategy;
     }
-
     
     public get orderNr() : number {
         return this._orderNr;
@@ -23,6 +23,10 @@ export class Order {
     
     addSeatReservation(ticket: MovieTicket): void {
         this._seatReservations.push(ticket);
+    }
+
+    calculatePrice(): number {
+        return this._priceStrategy.calculatePrice(this._seatReservations);
     }
 
     export(exportFormat: TicketExportFormat): void {
