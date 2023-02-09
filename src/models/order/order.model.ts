@@ -2,7 +2,7 @@ import { MovieTicket } from "../movie-ticket.model";
 import { PriceStrategy } from "./strategies/price.strategy";
 import { ExportStrategy } from "./strategies/export.strategy";
 
-export abstract class Order {
+export class Order {
     private _seatReservations: MovieTicket[] = [];
 
     private _orderNr: number;
