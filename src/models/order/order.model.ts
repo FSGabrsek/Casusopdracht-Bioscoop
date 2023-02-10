@@ -1,6 +1,8 @@
 import { MovieTicket } from "../movie-ticket.model";
 import { PriceStrategy } from "./strategies/price.strategy";
 import { ExportStrategy } from "./strategies/export.strategy";
+import { OrderState } from "./states/order.state";
+import { OpenState } from "./states/open.state";
 
 export class Order {
     private _seatReservations: MovieTicket[] = [];
@@ -8,6 +10,8 @@ export class Order {
     private _orderNr: number;
     private _priceStrategy: PriceStrategy;
     private _exportStrategy: ExportStrategy;
+
+    state: OrderState;
 
     constructor(
         orderNr: number,
@@ -17,6 +21,8 @@ export class Order {
         this._orderNr = orderNr;
         this._priceStrategy = priceStrategy;
         this._exportStrategy = exportStrategy
+
+        this.state = new OpenState(this);
     }
     
     public get orderNr() : number {
