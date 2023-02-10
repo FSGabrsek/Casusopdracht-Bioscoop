@@ -41,6 +41,10 @@ export class Order {
         this._state.removeSeatReservation(ticket, this._seatReservations);
     }
 
+    timedOperation(): void {
+        this._state.timedOperation();
+    }
+
     submit(): void {
         this._state.submit();
     }
