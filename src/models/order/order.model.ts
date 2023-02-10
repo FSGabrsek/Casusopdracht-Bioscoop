@@ -11,7 +11,7 @@ export class Order {
     private _priceStrategy: PriceStrategy;
     private _exportStrategy: ExportStrategy;
 
-    state: OrderState;
+    private _state: OrderState;
 
     constructor(
         orderNr: number,
@@ -22,15 +22,35 @@ export class Order {
         this._priceStrategy = priceStrategy;
         this._exportStrategy = exportStrategy
 
-        this.state = new OpenState(this);
+        this._state = new OpenState(this);
     }
-    
+
+    public set state(value: OrderState) {
+        this._state = value;
+    }
+
     public get orderNr() : number {
         return this._orderNr;
     }
     
     addSeatReservation(ticket: MovieTicket): void {
-        this._seatReservations.push(ticket);
+        this._state.addSeatReservation(ticket, this._seatReservations);
+    }
+
+    removeSeatReservation(ticket: MovieTicket): void {
+        this._state.removeSeatReservation(ticket, this._seatReservations);
+    }
+
+    submit(): void {
+        this._state.submit();
+    }
+
+    cancel(): void {
+        this._state.cancel();
+    }
+
+    checkout(): void {
+        this._state.checkout();
     }
 
     calculatePrice(): number {
