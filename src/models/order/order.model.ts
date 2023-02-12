@@ -46,7 +46,7 @@ export class Order {
     }
 
     submit(): void {
-        this._state.submit();
+        this._state.submit(this._seatReservations);
     }
 
     cancel(): void {
