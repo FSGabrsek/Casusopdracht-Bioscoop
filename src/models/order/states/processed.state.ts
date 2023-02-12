@@ -19,7 +19,7 @@ export class ProcessedState implements OrderState {
     timedOperation(): void {
         throw new IllegalStateException();
     }
-    submit(): void {
+    submit(reservations: MovieTicket[]): void {
         throw new IllegalStateException();
     }
     cancel(): void {

@@ -19,7 +19,7 @@ export class ProvisionalState implements OrderState {
     timedOperation(): void {
         // deleteOrder();
     }
-    submit(): void {
+    submit(reservations: MovieTicket[]): void {
         throw new IllegalStateException();
     }
     cancel(): void {

@@ -22,7 +22,7 @@ export class SavedState implements OrderState {
         // sendAlert();
         this._context.state = new ProvisionalState(this._context);
     }
-    submit(): void {
+    submit(reservations: MovieTicket[]): void {
         throw new IllegalStateException();
     }
     cancel(): void {
