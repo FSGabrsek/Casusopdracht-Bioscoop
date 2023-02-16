@@ -1,4 +1,4 @@
-import MessagingService from "./message.service";
+import MessagingService from "./messaging.service";
 
 export default class EmailService implements MessagingService {
     format(content: string): string {
