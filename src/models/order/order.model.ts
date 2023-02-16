@@ -3,8 +3,10 @@ import { PriceStrategy } from "./strategies/price.strategy";
 import { ExportStrategy } from "./strategies/export.strategy";
 import { OrderState } from "./states/order.state";
 import { OpenState } from "./states/open.state";
+import Publisher from "../observer/publisher.observer";
+import Subscriber from "../observer/subscriber.observer";
 
-export class Order {
+export class Order implements Publisher<string> {
     private _seatReservations: MovieTicket[] = [];
 
     private _orderNr: number;
@@ -12,6 +14,8 @@ export class Order {
     private _exportStrategy: ExportStrategy;
 
     private _state: OrderState;
+
+    private _subscriptions: Subscriber<string>[] = [];
 
     constructor(
         orderNr: number,
@@ -31,6 +35,18 @@ export class Order {
 
     public get orderNr() : number {
         return this._orderNr;
+    }
+
+    subscribe(subscriber: Subscriber<string>): void {
+        this._subscriptions.push(subscriber);
+    }
+
+    unsubscribe(subscriber: Subscriber<string>): void {
+        this._subscriptions = this._subscriptions.filter(sub => sub != subscriber);
+    }
+
+    publish(event: string): void {
+        this._subscriptions.forEach(sub => sub.next(event));
     }
     
     addSeatReservation(ticket: MovieTicket): void {
