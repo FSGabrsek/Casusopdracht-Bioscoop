@@ -21,16 +21,16 @@ export class OpenState implements OrderState {
     }
     submit(reservations: MovieTicket[]): void {
         if (reservations.length > 0) {
+            this._context.publish(`order ${this._context.orderNr} has been saved`);
             this._context.state = new SavedState(this._context);
         } else {
             throw new Error('cannot submit an order with no reservations');
         }
     }
     cancel(): void {
-        // delete order
+        this._context.publish(`order ${this._context.orderNr} has been cancelled`);
     }
     checkout(): void {
         throw new IllegalStateException();
     }
-
 }

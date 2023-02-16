@@ -19,17 +19,17 @@ export class SavedState implements OrderState {
         reservations = reservations.filter(reservation => reservation != ticket);
     }
     timedOperation(): void {
-        // sendAlert();
+        this._context.publish(`order ${this._context.orderNr} will be cancelled in 1 day`);
         this._context.state = new ProvisionalState(this._context);
     }
     submit(reservations: MovieTicket[]): void {
         throw new IllegalStateException();
     }
     cancel(): void {
-        // deleteOrder();
+        this._context.publish(`order ${this._context.orderNr} has been cancelled`);
     }
     checkout(): void {
-        // processPayment();
+        this._context.publish(`order ${this._context.orderNr} has been processed`);
         this._context.state = new ProcessedState(this._context);
     }
 }
