@@ -1,5 +1,5 @@
 import Subscriber from "../observer/subscriber.observer";
-import MessagingService from "./services/message.service";
+import MessagingService from "./services/messaging.service";
 
 export default class AlertManager implements Subscriber<string> {
     private _messagingService: MessagingService;
