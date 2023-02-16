@@ -5,6 +5,6 @@ export default class WhatsappService implements MessagingService {
         return `<whatsapp>${content}</whatsapp>`
     }
     sendMessage(message: string): void {
-        console.log(this.format(message));
+        this.format(message);
     }
 }

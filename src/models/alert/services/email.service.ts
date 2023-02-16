@@ -5,6 +5,6 @@ export default class EmailService implements MessagingService {
         return `<email>${content}</email>`
     }
     sendMessage(message: string): void {
-        console.log(this.format(message));
+        this.format(message);
     }
 }

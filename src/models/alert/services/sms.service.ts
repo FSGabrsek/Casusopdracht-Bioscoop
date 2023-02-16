@@ -5,6 +5,6 @@ export default class SmsService implements MessagingService {
         return `<sms>${content}</sms>`
     }
     sendMessage(message: string): void {
-        console.log(this.format(message));
+        this.format(message);
     }
 }
