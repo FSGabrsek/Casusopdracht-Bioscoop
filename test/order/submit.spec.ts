@@ -1,4 +1,8 @@
 import IllegalStateException from "../../src/errors/illegal-state.exception";
+import AlertManager from "../../src/models/alert/alert-manager.model";
+import EmailService from "../../src/models/alert/services/email.service";
+import SmsService from "../../src/models/alert/services/sms.service";
+import WhatsappService from "../../src/models/alert/services/whatsapp.service";
 import { MovieScreening } from "../../src/models/movie-screening.model";
 import { MovieTicket } from "../../src/models/movie-ticket.model";
 import { Movie } from "../../src/models/movie.model";
@@ -33,6 +37,57 @@ test('should throw an error when submiting an open order with no reservations', 
     order.state = (new OpenState(order));
 
     expect(() => order.submit()).toThrowError('cannot submit an order with no reservations');
+});
+
+test('should send an sms when submitting an order with an sms alert', () => { 
+    const movie = new Movie('movie title');
+    const screening = new MovieScreening(movie, new Date(), 10);
+    const ticket =  new MovieTicket(screening, false, 1, 1);
+    const order = new Order(1, new StandardPriceStrategy(), new PlainTextExportStrategy());
+    const service = new SmsService();
+    const manager = new AlertManager(service);
+    const sendMessageSpy = jest.spyOn(service, 'sendMessage');
+    order.state = (new OpenState(order));
+    order.addSeatReservation(ticket);
+    order.subscribe(manager);
+
+    order.submit();
+
+    expect(sendMessageSpy).toBeCalled();
+});
+
+test('should send an email when submitting an order with an email alert', () => { 
+    const movie = new Movie('movie title');
+    const screening = new MovieScreening(movie, new Date(), 10);
+    const ticket =  new MovieTicket(screening, false, 1, 1);
+    const order = new Order(1, new StandardPriceStrategy(), new PlainTextExportStrategy());
+    const service = new EmailService();
+    const manager = new AlertManager(service);
+    const sendMessageSpy = jest.spyOn(service, 'sendMessage');
+    order.state = (new OpenState(order));
+    order.addSeatReservation(ticket);
+    order.subscribe(manager);
+
+    order.submit();
+
+    expect(sendMessageSpy).toBeCalled();
+});
+
+test('should send a whatsapp message when submitting an order with a whatsapp alert', () => { 
+    const movie = new Movie('movie title');
+    const screening = new MovieScreening(movie, new Date(), 10);
+    const ticket =  new MovieTicket(screening, false, 1, 1);
+    const order = new Order(1, new StandardPriceStrategy(), new PlainTextExportStrategy());
+    const service = new WhatsappService();
+    const manager = new AlertManager(service);
+    const sendMessageSpy = jest.spyOn(service, 'sendMessage');
+    order.state = (new OpenState(order));
+    order.addSeatReservation(ticket);
+    order.subscribe(manager);
+
+    order.submit();
+
+    expect(sendMessageSpy).toBeCalled();
 });
 
 test('should throw a state exception when submiting a saved order', () => {
