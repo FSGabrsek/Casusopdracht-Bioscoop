@@ -1,3 +1,3 @@
 export default interface Subscriber<T> {
-    next(event: T): void;
+    next(event?: T): void;
 }
