@@ -18,13 +18,13 @@ export class ProvisionalState implements OrderState {
         throw new IllegalStateException();
     }
     timedOperation(): void {
-        // deleteOrder();
+        this._context.publish(`order ${this._context.orderNr} has been cancelled`);
     }
     submit(reservations: MovieTicket[]): void {
         throw new IllegalStateException();
     }
     cancel(): void {
-        // deleteOrder();
+        this._context.publish(`order ${this._context.orderNr} has been cancelled`);
     }
     checkout(): void {
         this._context.publish(`order ${this._context.orderNr} has been processed`);
